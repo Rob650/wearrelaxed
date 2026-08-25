@@ -97,7 +97,6 @@
 
   .cta{
     display:inline-flex; align-items:center; justify-content:center;
-    margin-top:clamp(32px,5vw,48px); align-self:flex-start;
     padding:17px 34px;
     border:1px solid var(--tan); background:var(--tan); color:var(--ink);
     font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
@@ -105,6 +104,34 @@
   }
   .cta:hover{background:transparent; color:var(--tan);}
   a:focus-visible{outline:1px solid var(--tan); outline-offset:5px;}
+
+  .cta-row{display:flex; flex-wrap:wrap; gap:14px;
+            margin-top:clamp(32px,5vw,48px); align-self:flex-start;}
+
+  .cta-outline{background:transparent; color:var(--tan);}
+  .cta-outline:hover{background:var(--tan); color:var(--ink);}
+
+  button.cta{
+    font-family:inherit; appearance:none; -webkit-appearance:none;
+    cursor:pointer;
+  }
+  button.cta:disabled{opacity:.6; cursor:default;}
+
+  .join-form{display:flex; flex-wrap:wrap; gap:10px;}
+  .join-input{
+    background:transparent; color:var(--paper); font-family:var(--sans);
+    font-size:14px; padding:0 18px; min-width:220px;
+    border:1px solid rgba(var(--tan-rgb),.4);
+    outline:none; transition:border-color .3s ease;
+  }
+  .join-input::placeholder{color:var(--muted);}
+  .join-input:focus{border-color:var(--tan);}
+  .join-input:invalid:not(:placeholder-shown){border-color:#c97a6a;}
+
+  .join-msg{
+    margin:12px 0 0; font-size:13px; color:var(--tan);
+    min-height:1em;
+  }
 
   .bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
           border-top:1px solid rgba(var(--tan-rgb),.28); padding-top:clamp(20px,3vw,28px);}
@@ -152,7 +179,14 @@
     <h1 class="rise d1"><span>Wear</span><span>Relaxed</span></h1>
     <p class="lede rise d2">A curated view of relaxed streetwear.</p>
     <p class="sub rise d2">Oversized fits, worn-in denim, and everyday layers — clothing pulled from the street, not the runway. Discover the brands, people, and pieces defining the look.</p>
-    <a class="cta rise d3" href="https://instagram.com/wearrelaxed" target="_blank" rel="noopener">Follow on Instagram</a>
+    <div class="cta-row rise d3">
+      <a class="cta" href="https://instagram.com/wearrelaxed" target="_blank" rel="noopener">Follow on Instagram</a>
+      <form class="join-form" id="joinForm" novalidate>
+        <input class="join-input" type="email" name="email" placeholder="Your email" required autocomplete="email" />
+        <button class="cta cta-outline" type="submit">Join the List</button>
+      </form>
+    </div>
+    <p class="join-msg" id="joinMsg" aria-live="polite"></p>
   </main>
 
   <section class="about rise d4">
@@ -169,6 +203,59 @@
     <span class="tag">Wear Relaxed © 2026</span>
     <span class="tag"><a href="https://instagram.com/wearrelaxed" target="_blank" rel="noopener">@wearrelaxed</a></span>
   </footer>
+
+  <script>
+    (function(){
+      var FORM_ID = 'dWedbV';
+      var FIELD_ID = '51441d87-afd5-4830-893a-62dbe07d6057';
+      var form = document.getElementById('joinForm');
+      var msg = document.getElementById('joinMsg');
+      var input = form.querySelector('.join-input');
+      var btn = form.querySelector('button');
+
+      function uuid(){
+        if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
+          var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+          return v.toString(16);
+        });
+      }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault();
+        var email = input.value.trim();
+        if (!email || !input.checkValidity()) {
+          msg.textContent = 'Enter a valid email.';
+          return;
+        }
+        btn.disabled = true;
+        var original = btn.textContent;
+        btn.textContent = 'Joining…';
+        msg.textContent = '';
+
+        fetch('https://api.tally.so/forms/' + FORM_ID + '/respond', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            sessionUuid: uuid(),
+            respondentUuid: uuid(),
+            responses: (function(){ var r = {}; r[FIELD_ID] = email; return r; })(),
+            captchas: {},
+            isCompleted: true,
+            password: null
+          })
+        }).then(function(res){
+          if (!res.ok) throw new Error('bad status');
+          form.style.display = 'none';
+          msg.textContent = "You're on the list.";
+        }).catch(function(){
+          btn.disabled = false;
+          btn.textContent = original;
+          msg.textContent = 'Something went wrong — try again.';
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
