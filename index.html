@@ -46,21 +46,7 @@
   }
   a{color:inherit; text-decoration:none;}
 
-  /* ambient wash — single tan tone, very low intensity */
-  body::before{
-    content:""; position:fixed; inset:-20%; z-index:-1; pointer-events:none;
-    background:
-      radial-gradient(46% 40% at 18% 12%, rgba(var(--tan-rgb),.16), transparent 70%),
-      radial-gradient(52% 46% at 88% 92%, rgba(var(--tan-rgb),.20), transparent 72%),
-      radial-gradient(60% 50% at 60% 50%, rgba(var(--tan-rgb),.06), transparent 75%);
-    animation:drift 42s ease-in-out infinite alternate;
-  }
-  @keyframes drift{
-    from{transform:translate3d(0,0,0) scale(1);}
-    to{transform:translate3d(-2.5%,2%,0) scale(1.08);}
-  }
-
-  /* subtle film grain */
+  /* subtle film grain — true flat black underneath, no color wash */
   body::after{
     content:""; position:fixed; inset:0; z-index:99; pointer-events:none; opacity:.045;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
@@ -117,16 +103,23 @@
   }
   button.cta:disabled{opacity:.6; cursor:default;}
 
-  .join-form{display:flex; flex-wrap:wrap; gap:10px;}
+  .join-form{display:flex; flex-wrap:wrap; gap:10px; width:100%; max-width:420px;}
   .join-input{
     background:transparent; color:var(--paper); font-family:var(--sans);
-    font-size:14px; padding:0 18px; min-width:220px;
+    font-size:14px; padding:0 18px; height:54px;
+    flex:1 1 220px; min-width:0;
     border:1px solid rgba(var(--tan-rgb),.4);
     outline:none; transition:border-color .3s ease;
   }
   .join-input::placeholder{color:var(--muted);}
   .join-input:focus{border-color:var(--tan);}
   .join-input:invalid:not(:placeholder-shown){border-color:#c97a6a;}
+  .join-form .cta{flex:1 1 auto; white-space:nowrap;}
+
+  @media (max-width: 480px){
+    .join-form{flex-direction:column; align-items:stretch;}
+    .join-input, .join-form .cta{width:100%;}
+  }
 
   .join-msg{
     margin:12px 0 0; font-size:13px; color:var(--tan);
@@ -162,7 +155,6 @@
 
   @media (prefers-reduced-motion: reduce){
     .rise{opacity:1; transform:none; animation:none;}
-    body::before{animation:none;}
     .cta{transition:none;}
   }
 </style>
