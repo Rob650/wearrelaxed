@@ -103,23 +103,17 @@
   }
   button.cta:disabled{opacity:.6; cursor:default;}
 
-  .join-form{display:flex; flex-wrap:wrap; gap:10px; width:100%; max-width:420px;}
+  .join-form{display:flex; flex-direction:column; gap:10px; width:100%;}
   .join-input{
     background:transparent; color:var(--paper); font-family:var(--sans);
-    font-size:14px; padding:0 18px; height:54px;
-    flex:1 1 220px; min-width:0;
+    font-size:14px; padding:0 18px; height:54px; width:100%;
     border:1px solid rgba(var(--tan-rgb),.4);
     outline:none; transition:border-color .3s ease;
   }
   .join-input::placeholder{color:var(--muted);}
   .join-input:focus{border-color:var(--tan);}
   .join-input:invalid:not(:placeholder-shown){border-color:#c97a6a;}
-  .join-form .cta{flex:1 1 auto; white-space:nowrap;}
-
-  @media (max-width: 480px){
-    .join-form{flex-direction:column; align-items:stretch;}
-    .join-input, .join-form .cta{width:100%; flex:none;}
-  }
+  .join-form .cta{width:100%;}
 
   .join-msg{
     margin:12px 0 0; font-size:13px; color:var(--tan);
