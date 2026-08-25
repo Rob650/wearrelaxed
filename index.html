@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wear Relaxed — A curated view of relaxed fashion.</title>
 <meta name="description" content="Wear Relaxed is a curated view of relaxed fashion. Discover the brands, people, and pieces defining effortless style." />
-<meta name="theme-color" content="#121210" />
+<meta name="theme-color" content="#000000" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
 <meta property="og:title" content="Wear Relaxed" />
@@ -19,12 +19,11 @@
 
 <style>
   :root{
-    --ink:#121210;
+    --ink:#000000;
     --paper:#EDE9E2;
     --muted:rgba(237,233,226,.62);
-    --sand:#C9B49A;      /* warm sun-bleached neutral */
-    --sage:#9AA48D;      /* dry eucalyptus */
-    --clay:#7A5F4B;      /* earth, used only in the ambient wash */
+    --tan:#C9B49A;        /* the one accent tone, used throughout */
+    --tan-rgb:201,180,154;
     --sans:'Jost','Helvetica Neue',Arial,sans-serif;
     --serif:'Instrument Serif','Times New Roman',serif;
     --pad:clamp(22px,6vw,88px);
@@ -47,13 +46,13 @@
   }
   a{color:inherit; text-decoration:none;}
 
-  /* ambient daylight wash — dry earth and eucalyptus, very low intensity */
+  /* ambient wash — single tan tone, very low intensity */
   body::before{
     content:""; position:fixed; inset:-20%; z-index:-1; pointer-events:none;
     background:
-      radial-gradient(46% 40% at 18% 12%, rgba(154,164,141,.22), transparent 70%),
-      radial-gradient(52% 46% at 88% 92%, rgba(122,95,75,.26), transparent 72%),
-      radial-gradient(60% 50% at 60% 50%, rgba(201,180,154,.07), transparent 75%);
+      radial-gradient(46% 40% at 18% 12%, rgba(var(--tan-rgb),.16), transparent 70%),
+      radial-gradient(52% 46% at 88% 92%, rgba(var(--tan-rgb),.20), transparent 72%),
+      radial-gradient(60% 50% at 60% 50%, rgba(var(--tan-rgb),.06), transparent 75%);
     animation:drift 42s ease-in-out infinite alternate;
   }
   @keyframes drift{
@@ -69,7 +68,7 @@
 
   .tag{
     font-size:11px; font-weight:500; letter-spacing:.24em;
-    text-transform:uppercase; color:var(--sage);
+    text-transform:uppercase; color:var(--tan);
   }
 
   .top{display:flex; justify-content:space-between; gap:16px;}
@@ -91,7 +90,7 @@
     font-family:var(--serif);
     font-size:clamp(1.45rem,3.4vw,2.4rem);
     line-height:1.2;
-    color:var(--sand);
+    color:var(--tan);
     margin:clamp(26px,4vw,44px) 0 0;
   }
   .sub{max-width:36ch; color:var(--muted); margin:14px 0 0;}
@@ -100,15 +99,15 @@
     display:inline-flex; align-items:center; justify-content:center;
     margin-top:clamp(32px,5vw,48px); align-self:flex-start;
     padding:17px 34px;
-    border:1px solid var(--sand); background:var(--sand); color:var(--ink);
+    border:1px solid var(--tan); background:var(--tan); color:var(--ink);
     font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
     transition:background .45s ease, color .45s ease;
   }
-  .cta:hover{background:transparent; color:var(--sand);}
-  a:focus-visible{outline:1px solid var(--sand); outline-offset:5px;}
+  .cta:hover{background:transparent; color:var(--tan);}
+  a:focus-visible{outline:1px solid var(--tan); outline-offset:5px;}
 
   .bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
-          border-top:1px solid rgba(154,164,141,.28); padding-top:clamp(20px,3vw,28px);}
+          border-top:1px solid rgba(var(--tan-rgb),.28); padding-top:clamp(20px,3vw,28px);}
   .bottom a:hover{color:var(--paper);}
 
   /* load-in */
