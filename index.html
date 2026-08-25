@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Wear Relaxed — A curated view of relaxed streetwear.</title>
 <meta name="description" content="Wear Relaxed is a curated view of relaxed streetwear — oversized fits, worn-in denim, and everyday layers pulled from the street, not the runway. Discover the brands, people, and pieces defining the look." />
-<meta name="theme-color" content="#000000" />
+<meta name="theme-color" content="#ffffff" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 
 <meta property="og:title" content="Wear Relaxed" />
@@ -16,149 +16,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Jost:wght@400;500&display=swap" rel="stylesheet">
-
-<style>
-  :root{
-    --ink:#000000;
-    --paper:#EDE9E2;
-    --muted:rgba(237,233,226,.62);
-    --tan:#C9B49A;        /* the one accent tone, used throughout */
-    --tan-rgb:201,180,154;
-    --sans:'Jost','Helvetica Neue',Arial,sans-serif;
-    --serif:'Instrument Serif','Times New Roman',serif;
-    --pad:clamp(22px,6vw,88px);
-  }
-
-  *{box-sizing:border-box;}
-  html{-webkit-text-size-adjust:100%;}
-  body{
-    margin:0;
-    min-height:100svh;
-    display:flex; flex-direction:column;
-    padding:clamp(26px,5vw,48px) var(--pad) clamp(28px,4vw,44px);
-    background:var(--ink);
-    color:var(--paper);
-    font-family:var(--sans);
-    font-weight:400;
-    font-size:16px;
-    line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  a{color:inherit; text-decoration:none;}
-
-  /* subtle film grain — true flat black underneath, no color wash */
-  body::after{
-    content:""; position:fixed; inset:0; z-index:99; pointer-events:none; opacity:.045;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  .tag{
-    font-size:11px; font-weight:500; letter-spacing:.24em;
-    text-transform:uppercase; color:var(--tan);
-  }
-
-  .top{display:flex; justify-content:space-between; gap:16px;}
-
-  main{flex:1; display:flex; flex-direction:column; justify-content:center;
-       padding:clamp(48px,10vw,96px) 0;}
-
-  h1{
-    margin:0;
-    font-weight:500;
-    font-size:clamp(3.2rem,12.4vw,10.5rem);
-    line-height:.9;
-    letter-spacing:-0.005em;
-    text-transform:uppercase;
-  }
-  h1 span{display:block;}
-
-  .lede{
-    font-family:var(--serif);
-    font-size:clamp(1.45rem,3.4vw,2.4rem);
-    line-height:1.2;
-    color:var(--tan);
-    margin:clamp(26px,4vw,44px) 0 0;
-  }
-  .sub{max-width:52ch; color:var(--muted); margin:14px 0 0;}
-
-  .cta{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:17px 34px;
-    border:1px solid var(--tan); background:var(--tan); color:var(--ink);
-    font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase;
-    transition:background .45s ease, color .45s ease;
-  }
-  .cta:hover{background:transparent; color:var(--tan);}
-  a:focus-visible{outline:1px solid var(--tan); outline-offset:5px;}
-
-  .cta-row{display:flex; flex-direction:column; flex-wrap:wrap; gap:14px;
-            margin-top:clamp(32px,5vw,48px); align-self:flex-start;}
-
-  .cta-outline{background:transparent; color:var(--tan);}
-  .cta-outline:hover{background:var(--tan); color:var(--ink);}
-
-  button.cta{
-    font-family:inherit; appearance:none; -webkit-appearance:none;
-    cursor:pointer;
-  }
-  button.cta:disabled{opacity:.6; cursor:default;}
-
-  .join-form{display:flex; flex-direction:column; gap:10px; width:100%;}
-  .join-input{
-    background:transparent; color:var(--paper); font-family:var(--sans);
-    font-size:14px; padding:0 18px; height:54px; width:100%;
-    border:1px solid rgba(var(--tan-rgb),.4);
-    outline:none; transition:border-color .3s ease;
-  }
-  .join-input::placeholder{color:var(--muted);}
-  .join-input:focus{border-color:var(--tan);}
-  .join-input:invalid:not(:placeholder-shown){border-color:#c97a6a;}
-  .join-form .cta{width:100%;}
-
-  .join-msg{
-    margin:12px 0 0; font-size:13px; color:var(--tan);
-    min-height:1em;
-  }
-
-  .bottom{display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px;
-          border-top:1px solid rgba(var(--tan-rgb),.28); padding-top:clamp(20px,3vw,28px);}
-  .bottom a:hover{color:var(--paper);}
-
-  .about{
-    max-width:64ch;
-    margin:0 0 clamp(56px,9vw,104px);
-    padding-top:clamp(28px,4vw,40px);
-    border-top:1px solid rgba(var(--tan-rgb),.28);
-  }
-  .about p{margin:16px 0 0; color:var(--muted); font-size:clamp(1rem,1.5vw,1.05rem); line-height:1.75;}
-  .about p:first-of-type{margin-top:16px;}
-  .about .close{
-    font-family:var(--serif); color:var(--tan);
-    font-size:clamp(1.25rem,2.4vw,1.7rem); line-height:1.35;
-    margin-top:clamp(24px,4vw,32px);
-  }
-  .about .sign{
-    font-family:var(--serif); font-style:italic; color:var(--paper);
-    font-size:clamp(1.1rem,2vw,1.3rem); margin-top:10px;
-  }
-
-  /* load-in */
-  .rise{opacity:0; transform:translateY(18px); animation:rise 1.1s cubic-bezier(.2,.7,.2,1) forwards;}
-  .d1{animation-delay:.12s;} .d2{animation-delay:.26s;} .d3{animation-delay:.4s;} .d4{animation-delay:.54s;}
-  @keyframes rise{to{opacity:1; transform:none;}}
-
-  @media (prefers-reduced-motion: reduce){
-    .rise{opacity:1; transform:none; animation:none;}
-    .cta{transition:none;}
-  }
-</style>
+<link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-  <header class="top rise">
-    <span class="tag">Wear Relaxed</span>
-    <span class="tag">Los Angeles</span>
+  <header class="nav rise">
+    <a class="nav-logo" href="index.html">Wear Relaxed</a>
+    <nav class="nav-links">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+    </nav>
   </header>
 
   <main>
@@ -168,22 +36,12 @@
     <div class="cta-row rise d3">
       <a class="cta" href="https://instagram.com/wearrelaxed" target="_blank" rel="noopener">Follow on Instagram</a>
       <form class="join-form" id="joinForm" novalidate>
-        <input class="join-input" type="email" name="email" placeholder="Your email" required autocomplete="email" />
+        <input class="join-input" type="email" name="email" placeholder="Email" required autocomplete="email" />
         <button class="cta cta-outline" type="submit">Join the List</button>
       </form>
     </div>
     <p class="join-msg" id="joinMsg" aria-live="polite"></p>
   </main>
-
-  <section class="about rise d4">
-    <span class="tag">About Wear Relaxed</span>
-    <p>Wear Relaxed is built around a simple idea: style doesn’t have to look forced.</p>
-    <p>We document the people, outfits, and everyday moments shaping modern relaxed streetwear — starting in Los Angeles and expanding wherever the culture takes us.</p>
-    <p>Our focus is on real style in the real world: oversized silhouettes, easy layers, vintage influence, sneakers, workwear, luxury, and the individual details that make an outfit feel personal.</p>
-    <p>What started as a street photography project is becoming something bigger — a platform for discovering the people, brands, and ideas defining a more relaxed way of dressing.</p>
-    <p class="close">We’re here to document the culture first.<br>Then help shape where it goes next.</p>
-    <p class="sign">Wear Relaxed.</p>
-  </section>
 
   <footer class="bottom rise d4">
     <span class="tag">Wear Relaxed © 2026</span>
